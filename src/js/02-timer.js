@@ -13,7 +13,6 @@ let timeEnd = null;
 function addLeadingZero(value) {
     return String(value).padStart(2, '0');
 }
-
 //*-Принемает время в милисекундах
 //*-Высчитывает сколько в них вмещаеться часох/минут/секунд
 //*-Возвращает обьект с свойствами days, hours, minutes,seconds.
@@ -27,17 +26,12 @@ function convertMs(ms) {
 
   // Remaining days
   const days = addLeadingZero(Math.floor(ms / day));
-  
   // Remaining hours
   const hours = addLeadingZero(Math.floor((ms % day) / hour));
-  
   // Remaining minutes
   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
- 
   // Remaining seconds
   const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
-  
-
   return { days, hours, minutes, seconds };
 }
 
@@ -51,7 +45,6 @@ const options = {
     console.log(selectedDates[0]);
     if (selectedDates[0] < Date.now()) {
       window.alert("Please choose a date in the future");
-      
     }
     else {
       btnStart.removeAttribute('disabled');
@@ -59,9 +52,6 @@ const options = {
     }
   },
 };
-
-
-
 const timer = {
   start() {
     // const startTime = Date.now();
@@ -69,6 +59,9 @@ const timer = {
       const currentTime = Date.now();
       //const deltaTime = currentTime - startTime;
       const deltaTime = timeEnd - currentTime;
+      if (deltaTime <= 1000) {
+      clearInterval(this.timerId);
+      } 
       const { days, hours, minutes, seconds } = convertMs(deltaTime);
       console.log(`${days}::${hours}::${minutes}::${seconds}`);
 
@@ -76,10 +69,6 @@ const timer = {
       document.querySelector('[data-hours]').innerHTML = hours;
       document.querySelector('[data-minutes]').innerHTML = minutes;
       document.querySelector('[data-seconds]').innerHTML = seconds;
-      
-      if (deltaTime <= 0) {
-      clearInterval(timerId);
-      } 
     }, 1000
     )
    

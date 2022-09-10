@@ -15,13 +15,18 @@ function getRandomHexColor() {
 
 //*Функция на кнопку старт
 refs.startBtn.addEventListener("click", () => {
-    timerId = setInterval(() => {
-        color = getRandomHexColor();
+        const color = getRandomHexColor();
         document.body.setAttribute(
         'style',
         'background-color:'+ color,
         );
         refs.startBtn.setAttribute('disabled', true);
+    timerId = setInterval(() => {
+       const color = getRandomHexColor();
+        document.body.setAttribute(
+        'style',
+        'background-color:'+ color,
+        );
     console.log(setInterval);
   }, 1000);
 });
